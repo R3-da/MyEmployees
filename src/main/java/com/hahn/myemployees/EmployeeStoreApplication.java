@@ -24,7 +24,7 @@ public class EmployeeStoreApplication {
                         .run(args);
 
         logger.info("🚀 API Server started on port 8080");
-        logger.info("📚 API Documentation available at http://localhost:8080/api/employees");
+        logger.info("📚 API Testing: The GET /api/employees endpoint is accessible at http://localhost:8080/api/employees");
 
         EventQueue.invokeLater(() -> {
             HomeScreen homeScreen = context.getBean(HomeScreen.class);
