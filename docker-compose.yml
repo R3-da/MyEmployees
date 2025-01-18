@@ -1,23 +1,11 @@
 # version: '3.8'
 
 services:
-  app:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_PROFILES_ACTIVE=staging
-      - JAVA_OPTS=-Djava.awt.headless=true
-    depends_on:
-      - db
-    networks:
-      - myemployees-network
-
   db:
     image: mysql:8.0
     environment:
       - MYSQL_DATABASE=myemployees
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes  # Allow empty password
     ports:
       - "3306:3306"
     volumes:

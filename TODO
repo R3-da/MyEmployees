@@ -7,7 +7,10 @@ Todo:
   Testing:
     ☐ Add unit tests
     ☐ Add integration tests
-  ☐ Create a docker image
+  Create docker images and setup docker-compose:
+    ✔ Create docker image for db @done(25-01-18 20:51)
+    ✘ Create docker image for spring boot app @cancelled(25-01-18 20:44)
+    ✔ Create docker-compose file @done(25-01-18 20:51)
   ☐ Add postman collection
   Add a readme:
     ☐ Screenshots
