@@ -1,10 +1,21 @@
 
 Todo:
-  ☐ Implement role based authentication
-  ☐ Add unit tests
+  Implement role based authentication:
+    ☐ Admin
+    ☐ HR
+    ☐ Manager
+  Testing:
+    ☐ Add unit tests
+    ☐ Add integration tests
   ☐ Create a docker image
   ☐ Add postman collection
-  ☐ Add a readme
-  ☐ migrate to Oracle DB
+  Add a readme:
+    ☐ Screenshots
+    ☐ How to run
+    ☐ How to run tests
+    ☐ How to run docker image
+    ☐ How to run postman collection
+    ☐ Requirements
+  ☐ migrate from MySQL to Oracle DB
   ☐ Log all modifications history and export to excel
   ☐ implement Swagger UI
