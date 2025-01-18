@@ -1,7 +1,6 @@
-package hahn.myemployees;
+package com.hahn.myemployees;
 
-import hahn.myemployees.view.HomeScreen;
-import org.slf4j.LoggerFactory;
+import com.hahn.myemployees.view.HomeScreen;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

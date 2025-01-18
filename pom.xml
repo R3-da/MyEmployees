@@ -10,10 +10,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>hahn</groupId>
-	<artifactId>myemployee</artifactId>
+	<groupId>com.hahn</groupId>
+	<artifactId>myemployees</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>myemployee</name>
+	<name>myemployees</name>
 	<description>Employee Store System</description>
 
 	<properties>

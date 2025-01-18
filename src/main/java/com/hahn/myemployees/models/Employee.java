@@ -1,4 +1,4 @@
-package hahn.myemployees.models;
+package com.hahn.myemployees.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

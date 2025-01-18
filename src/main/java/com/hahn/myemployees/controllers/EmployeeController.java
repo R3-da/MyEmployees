@@ -1,7 +1,7 @@
-package hahn.myemployees.controllers;
+package com.hahn.myemployees.controllers;
 
-import hahn.myemployees.models.Employee;
-import hahn.myemployees.services.EmployeeService;
+import com.hahn.myemployees.models.Employee;
+import com.hahn.myemployees.services.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

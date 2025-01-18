@@ -1,4 +1,4 @@
-package hahn.myemployees;
+package com.hahn.myemployees;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

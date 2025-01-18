@@ -1,7 +1,7 @@
-package hahn.myemployees.view;
+package com.hahn.myemployees.view;
 
-import hahn.myemployees.models.Employee;
-import hahn.myemployees.services.EmployeeService;
+import com.hahn.myemployees.models.Employee;
+import com.hahn.myemployees.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
