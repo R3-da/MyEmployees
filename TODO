@@ -1,0 +1,9 @@
+
+Todo:
+  ☐ Implement role based authentication
+  ☐ Add unit tests
+  ☐ Create a docker image
+  ☐ Add postman collection
+  ☐ Add a readme
+  ☐ migrate to Oracle DB
+  ☐ Log all modifications history and export to excel
