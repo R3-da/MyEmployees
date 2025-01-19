@@ -2,16 +2,35 @@ package com.hahn.myemployees.services;
 
 import com.hahn.myemployees.models.User;
 import com.hahn.myemployees.repository.UserRepository;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Key;
+import java.util.Date;
 import java.util.List;
 
 @Service
 @Transactional
 public class UserService {
+    private static final String SECRET_KEY = "yourSecretKeyHereMakeItLongAndSecure123!@#";
+
+    public String generateJwtToken(User user) {
+        return Jwts.builder()
+                .setSubject(user.getUsername())
+                .claim("role", user.getRole())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
+    }
+
+
+
     @Autowired
     private UserRepository userRepository;
 

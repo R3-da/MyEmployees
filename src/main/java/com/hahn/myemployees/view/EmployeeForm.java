@@ -61,7 +61,7 @@ public class EmployeeForm extends JFrame {
     private void addEmployee() {
         // Read the form values
         if (textFullName.getText().equals("")) {
-            showMessage("Proporciona el nombre del libro");
+            showMessage("Provide the name of the employee");
             textFullName.requestFocusInWindow();
             return;
         }
@@ -74,7 +74,7 @@ public class EmployeeForm extends JFrame {
         var employeeContactInfo = textContactInfo.getText();
         var employeeAddress = textAddress.getText();
 
-        // Create the book object
+        // Create the employee object
         var employee = new Employee(
                 null,
                 employeeFullName,
@@ -86,7 +86,7 @@ public class EmployeeForm extends JFrame {
                 employeeAddress
         );
         this.employeeService.saveEmployee(employee);
-        showMessage("The book has been added successfully");
+        showMessage("The employee has been added successfully");
         clearForm();
         showEmployees();
 
@@ -94,12 +94,12 @@ public class EmployeeForm extends JFrame {
 
     private void modifyEmployee() {
         if (this.textId.getText().equals("")) {
-           showMessage("You must select a recordo");
+           showMessage("You must select a record");
         } else {
 
-            // Check that the number of the book is zero
+            // Check that the number of the employee is zero
             if (textFullName.getText().equals("")) {
-                showMessage("Proporciona el nombre del libro");
+                showMessage("Provide the name of the employee");
                 textFullName.requestFocusInWindow();
                 return;
             }
@@ -112,7 +112,7 @@ public class EmployeeForm extends JFrame {
             var employeeContactInfo = textContactInfo.getText();
             var employeeAddress = textAddress.getText();
 
-            // Create the book object
+            // Create the employee object
             var employee = new Employee(
                     null,
                     employeeFullName,
@@ -124,7 +124,7 @@ public class EmployeeForm extends JFrame {
                     employeeAddress
             );
             employeeService.saveEmployee(employee);
-            showMessage("The book has been successfully modified");
+            showMessage("The employee has been successfully modified");
             clearForm();
             showEmployees();
         }
@@ -137,7 +137,7 @@ public class EmployeeForm extends JFrame {
 
             var employee = new Employee();
             employeeService.deleteEmployee(employee);
-            showMessage("The book has been deleted successfully");
+            showMessage("The employee has been deleted successfully");
             clearForm();
             showEmployees();
         } else {
@@ -163,17 +163,17 @@ public class EmployeeForm extends JFrame {
             textId.setText(employeeId);
             String employeeFullName = employeeTable.getModel().getValueAt(line, 1).toString();
             textFullName.setText(employeeFullName);
-            String employeeJobTitle = employeeTable.getModel().getValueAt(line, 1).toString();
+            String employeeJobTitle = employeeTable.getModel().getValueAt(line, 2).toString();
             textJobTitle.setText(employeeJobTitle);
-            String employeeDepartmentId = employeeTable.getModel().getValueAt(line, 2).toString();
+            String employeeDepartmentId = employeeTable.getModel().getValueAt(line, 3).toString();
             textDepartmentId.setText(employeeDepartmentId);
-            String employeeHireDate = employeeTable.getModel().getValueAt(line, 3).toString();
+            String employeeHireDate = employeeTable.getModel().getValueAt(line, 4).toString();
             textHireDate.setText(employeeHireDate);
-            String employeeEmploymentStatus = employeeTable.getModel().getValueAt(line, 4).toString();
+            String employeeEmploymentStatus = employeeTable.getModel().getValueAt(line, 5).toString();
             textEmploymentStatus.setText(employeeEmploymentStatus);
-            String employeeContactInfo = employeeTable.getModel().getValueAt(line, 4).toString();
+            String employeeContactInfo = employeeTable.getModel().getValueAt(line, 6).toString();
             textContactInfo.setText(employeeContactInfo);
-            String employeeAddress = employeeTable.getModel().getValueAt(line, 4).toString();
+            String employeeAddress = employeeTable.getModel().getValueAt(line, 7).toString();
             textAddress.setText(employeeAddress);
         }
     }
@@ -212,7 +212,7 @@ public class EmployeeForm extends JFrame {
         // Clean the table
         tableModel.setRowCount(0);
 
-        // Get all the books stored in the database
+        // Get all the employees stored in the database
         var employees = employeeService.showEmployees();
         employees.forEach(employee -> {
             Object[] lineEmployee = {
