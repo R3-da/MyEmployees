@@ -1,4 +1,4 @@
-package com.hahn.myemployees.models;
+package com.hahn.myemployees.model;
 
 public enum UserRole {
     ADMIN,

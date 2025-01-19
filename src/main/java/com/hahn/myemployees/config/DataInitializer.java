@@ -1,8 +1,8 @@
 package com.hahn.myemployees.config;
 
-import com.hahn.myemployees.models.User;
-import com.hahn.myemployees.models.UserRole;
-import com.hahn.myemployees.services.UserService;
+import com.hahn.myemployees.model.User;
+import com.hahn.myemployees.model.UserRole;
+import com.hahn.myemployees.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

@@ -1,16 +1,14 @@
-package com.hahn.myemployees.services;
+package com.hahn.myemployees.service;
 
-import com.hahn.myemployees.models.User;
+import com.hahn.myemployees.model.User;
 import com.hahn.myemployees.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Key;
 import java.util.Date;
 import java.util.List;
 

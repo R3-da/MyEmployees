@@ -1,10 +1,8 @@
 
-package com.hahn.myemployees.models;
+package com.hahn.myemployees.model;
 
-import javax.persistence.*;
 import javax.persistence.Column;
 
-import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

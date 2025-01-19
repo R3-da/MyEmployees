@@ -1,7 +1,7 @@
-package com.hahn.myemployees.controllers;
+package com.hahn.myemployees.controller;
 
-import com.hahn.myemployees.models.User;
-import com.hahn.myemployees.services.UserService;
+import com.hahn.myemployees.model.User;
+import com.hahn.myemployees.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

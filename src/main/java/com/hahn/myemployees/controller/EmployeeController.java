@@ -1,7 +1,7 @@
-package com.hahn.myemployees.controllers;
+package com.hahn.myemployees.controller;
 
-import com.hahn.myemployees.models.Employee;
-import com.hahn.myemployees.services.EmployeeService;
+import com.hahn.myemployees.model.Employee;
+import com.hahn.myemployees.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

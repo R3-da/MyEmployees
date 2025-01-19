@@ -1,6 +1,6 @@
-package com.hahn.myemployees.services;
+package com.hahn.myemployees.service;
 
-import com.hahn.myemployees.models.Employee;
+import com.hahn.myemployees.model.Employee;
 
 import java.util.List;
 

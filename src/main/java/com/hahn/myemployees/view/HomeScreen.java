@@ -1,17 +1,15 @@
 package com.hahn.myemployees.view;
 
-import com.hahn.myemployees.models.UserRole;
+import com.hahn.myemployees.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import com.hahn.myemployees.models.User;
+import com.hahn.myemployees.model.User;
 
-import com.hahn.myemployees.services.UserService;
+import com.hahn.myemployees.service.UserService;
 
 
 @Component
