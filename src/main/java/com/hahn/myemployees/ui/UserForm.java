@@ -2,6 +2,7 @@ package com.hahn.myemployees.ui;
 
 import com.hahn.myemployees.model.User;
 import com.hahn.myemployees.model.UserRole;
+import com.hahn.myemployees.service.EmployeeService;
 import com.hahn.myemployees.service.UserService;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class UserForm extends JFrame {
     private UserService userService;
+    private EmployeeService employeeService;
     private JTable userTable;
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -41,12 +43,15 @@ public class UserForm extends JFrame {
         JButton updateButton = new JButton("Update User");
         JButton deleteButton = new JButton("Delete User");
         JButton clearButton = new JButton("Clear");
+        JButton returnButton = new JButton("Return");
+
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addButton);
         buttonPanel.add(updateButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(clearButton);
+        buttonPanel.add(returnButton);
 
         // Create table
         String[] columns = {"Username", "Role"};
@@ -111,6 +116,8 @@ public class UserForm extends JFrame {
 
         clearButton.addActionListener(e -> clearForm());
 
+        returnButton.addActionListener(e -> returnToMenu());
+
         refreshTable();
         setLocationRelativeTo(null);
     }
@@ -153,5 +160,17 @@ public class UserForm extends JFrame {
             return false;
         }
         return true;
+    }
+
+    private void returnToMenu() {
+        this.dispose(); // Close the current form
+        JFrame frame = new JFrame("Menu");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
+        
+        MenuPanel menuPanel = new MenuPanel(employeeService, userService);
+        frame.add(menuPanel);
+        frame.setVisible(true);
     }
 }

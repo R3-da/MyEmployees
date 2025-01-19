@@ -104,6 +104,7 @@ public class LoginScreen extends JFrame {
             if (currentUser != null && userService.hasPermission(currentUser, "MANAGE_USERS")) {
                 UserForm userForm = new UserForm(userService);
                 userForm.setVisible(true);
+                this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Access denied. Admin privileges required.");
             }
