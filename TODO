@@ -1,9 +1,9 @@
 
 Todo:
   Implement role based authentication:
-    ☐ Admin
-    ☐ HR
-    ☐ Manager
+    ✔ Admin @done(25-01-19 18:48)
+    ✔ HR @done(25-01-19 18:48)
+    ✔ Manager @done(25-01-19 18:48)
   Testing:
     ✔ Add unit tests @done(25-01-19 18:47)
     ☐ Add integration tests
