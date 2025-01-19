@@ -5,7 +5,7 @@ Todo:
     ☐ HR
     ☐ Manager
   Testing:
-    ☐ Add unit tests
+    ✔ Add unit tests @done(25-01-19 18:47)
     ☐ Add integration tests
   Create docker images and setup docker-compose:
     ✔ Create docker image for db @done(25-01-18 20:51)
