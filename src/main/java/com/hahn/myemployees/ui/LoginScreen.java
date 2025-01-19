@@ -8,11 +8,14 @@ import java.awt.*;
 import com.hahn.myemployees.model.User;
 import com.hahn.myemployees.service.UserService;
 
+import com.hahn.myemployees.service.EmployeeService;
+
 @Component
 public class LoginScreen extends JFrame {
     
     @Autowired
     private UserService userService;
+    private EmployeeService employeeService;
 
     private JPanel loginPanel;
     private JPanel menuScreen;
@@ -20,7 +23,9 @@ public class LoginScreen extends JFrame {
     private JPasswordField passwordField;
 
     @Autowired
-    public LoginScreen(EmployeeForm employeeForm, UserService userService) {
+    public LoginScreen(UserService userService, EmployeeService employeeService) {
+        this.userService = userService;
+        this.employeeService = employeeService;
         setTitle("MyEmployees System");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +56,7 @@ public class LoginScreen extends JFrame {
                 new String(passwordField.getPassword())
             );
             if (user != null) {
-                showMenuForRole(user.getRole(), employeeForm);
+                showMenuForRole(user.getRole());
             } else {
                 JOptionPane.showMessageDialog(this,
                     "Invalid credentials",
@@ -63,96 +68,15 @@ public class LoginScreen extends JFrame {
         add(loginPanel);
     }
 
-    private void showMenuForRole(UserRole role, EmployeeForm employeeForm) {
-        loginPanel.setVisible(false);
-        menuScreen.removeAll();
-
-        switch (role) {
-            case ADMIN:
-                addAdminMenuItems(employeeForm);
-                break;
-            case HR:
-                addHRMenuItems(employeeForm);
-                break;
-            case MANAGER:
-                addManagerMenuItems(employeeForm);
-                break;
-        }
-
-        add(menuScreen);
-        menuScreen.setVisible(true);
-        revalidate();
-        repaint();
+    private void showMenuForRole(UserRole role) {
+        dispose(); // Close the login window
+        MenuScreen menuScreen = new MenuScreen(employeeService, userService);
+        JFrame menuFrame = new JFrame("MyEmployees System");
+        menuFrame.setSize(600, 400);
+        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuFrame.setLocationRelativeTo(null);
+        menuFrame.add(menuScreen);
+        menuFrame.setVisible(true);
     }
 
-    private void addAdminMenuItems(EmployeeForm employeeForm) {
-        JButton manageEmployees = new JButton("Manage Employees");
-        JButton manageUsers = new JButton("Manage Users");
-        JButton logoutButton = new JButton("Logout");
-
-        menuScreen.add(manageEmployees);
-        menuScreen.add(manageUsers);
-        menuScreen.add(logoutButton);
-
-        manageEmployees.addActionListener(e -> {
-            employeeForm.setVisible(true);
-            this.setVisible(false);
-        });
-
-        manageUsers.addActionListener(e -> {
-            User currentUser = userService.authenticate(usernameField.getText(), new String(passwordField.getPassword()));
-            if (currentUser != null && userService.hasPermission(currentUser, "MANAGE_USERS")) {
-                UserForm userForm = new UserForm(userService);
-                userForm.setVisible(true);
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Access denied. Admin privileges required.");
-            }
-        });
-
-        logoutButton.addActionListener(e -> logout());
-    }
-
-    private void addHRMenuItems(EmployeeForm employeeForm) {
-        JButton manageEmployees = new JButton("Manage Employees");
-        JButton viewReports = new JButton("View Reports");
-        JButton logoutButton = new JButton("Logout");
-
-        menuScreen.add(manageEmployees);
-        menuScreen.add(viewReports);
-        menuScreen.add(logoutButton);
-
-        manageEmployees.addActionListener(e -> {
-            employeeForm.setVisible(true);
-            this.setVisible(false);
-        });
-
-        logoutButton.addActionListener(e -> logout());
-    }
-
-    private void addManagerMenuItems(EmployeeForm employeeForm) {
-        JButton viewTeam = new JButton("View Team Members");
-        JButton manageTeam = new JButton("Manage Team");
-        JButton logoutButton = new JButton("Logout");
-
-        menuScreen.add(viewTeam);
-        menuScreen.add(manageTeam);
-        menuScreen.add(logoutButton);
-
-        viewTeam.addActionListener(e -> {
-            employeeForm.setVisible(true);
-            this.setVisible(false);
-        });
-
-        logoutButton.addActionListener(e -> logout());
-    }
-
-    private void logout() {
-        usernameField.setText("");
-        passwordField.setText("");
-        menuScreen.setVisible(false);
-        loginPanel.setVisible(true);
-        revalidate();
-        repaint();
-    }
 }
