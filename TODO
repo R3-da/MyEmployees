@@ -19,7 +19,8 @@ Todo:
     ☐ How to run docker image
     ☐ How to run postman collection
     ☐ Requirements
-  ☐ migrate from MySQL to Oracle DB
+  // Oracle DB is time consuming to setup on MACOS
+  ✘ migrate from MySQL to Oracle DB @cancelled(25-01-19 02:11)
   ☐ Log all modifications history and export to excel
   ✔ implement Swagger UI @done(25-01-18 23:55)
   ☐ record presentation video
