@@ -27,7 +27,7 @@ public class LoginScreen extends JFrame {
         this.userService = userService;
         this.employeeService = employeeService;
         setTitle("MyEmployees System");
-        setSize(600, 400);
+        setSize(600, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
