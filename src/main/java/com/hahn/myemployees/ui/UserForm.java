@@ -8,6 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
+
+
 public class UserForm extends JFrame {
     private UserService userService;
     private JTable userTable;
@@ -72,8 +77,16 @@ public class UserForm extends JFrame {
 
     private void refreshTable() {
         List<User> users = userService.getAllUsers();
-        // Update table model with users
-        // Implementation depends on your User model structure
+        String[] columns = {"Username", "Role"};
+        Object[][] data = new Object[users.size()][2];
+        
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            data[i][0] = user.getUsername();
+            data[i][1] = user.getRole();
+        }
+        
+        userTable.setModel(new DefaultTableModel(data, columns));
     }
 
     private void clearForm() {
