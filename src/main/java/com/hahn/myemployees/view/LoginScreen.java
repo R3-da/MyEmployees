@@ -9,14 +9,14 @@ import com.hahn.myemployees.model.User;
 import com.hahn.myemployees.service.UserService;
 
 @Component
-public class HomeScreen extends JFrame {
+public class LoginScreen extends JFrame {
     private JPanel loginPanel;
     private JPanel menuPanel;
     private JTextField usernameField;
     private JPasswordField passwordField;
 
     @Autowired
-    public HomeScreen(EmployeeForm employeeForm, UserService userService) {
+    public LoginScreen(EmployeeForm employeeForm, UserService userService) {
         setTitle("MyEmployees System");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

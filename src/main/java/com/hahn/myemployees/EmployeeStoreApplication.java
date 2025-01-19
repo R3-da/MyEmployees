@@ -1,6 +1,6 @@
 package com.hahn.myemployees;
 
-import com.hahn.myemployees.view.HomeScreen;
+import com.hahn.myemployees.view.LoginScreen;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -27,7 +27,7 @@ public class EmployeeStoreApplication {
         logger.info("📚 API Testing: The GET /api/employees endpoint is accessible at http://localhost:8080/api/employees");
 
         EventQueue.invokeLater(() -> {
-            HomeScreen homeScreen = context.getBean(HomeScreen.class);
+            LoginScreen homeScreen = context.getBean(LoginScreen.class);
             homeScreen.setVisible(true);
             logger.info("💻 Swing GUI initialized and displayed");
         });

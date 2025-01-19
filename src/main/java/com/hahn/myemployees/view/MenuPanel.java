@@ -62,7 +62,7 @@ public class MenuPanel extends JPanel {
         Window window = SwingUtilities.getWindowAncestor(this);
         window.dispose();
         EmployeeForm employeeForm = new EmployeeForm(employeeService, userService);
-        HomeScreen homeScreen = new HomeScreen(employeeForm, userService);
+        LoginScreen homeScreen = new LoginScreen(employeeForm, userService);
         homeScreen.setVisible(true);
     }
 
