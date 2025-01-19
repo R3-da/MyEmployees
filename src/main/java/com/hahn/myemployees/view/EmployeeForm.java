@@ -93,40 +93,41 @@ public class EmployeeForm extends JFrame {
     }
 
     private void modifyEmployee() {
-        if (this.textId.getText().equals("")) {
-           showMessage("You must select a record");
-        } else {
+        if (textId.getText().isEmpty()) {
+            showMessage("You must select a record to modify");
+            return;
+        }
 
-            // Check that the number of the employee is zero
-            if (textFullName.getText().equals("")) {
-                showMessage("Provide the name of the employee");
-                textFullName.requestFocusInWindow();
-                return;
+        try {
+            // Parse the ID from the text field
+            int employeeId = Integer.parseInt(textId.getText());
+
+            // Fetch the existing employee from the database
+            Employee existingEmployee = employeeService.searchEmployeeById(employeeId);
+
+            if (existingEmployee != null) {
+                // Update the existing employee's details
+                existingEmployee.setFullName(textFullName.getText());
+                existingEmployee.setJobTitle(textJobTitle.getText());
+                existingEmployee.setDepartmentId(Integer.parseInt(textDepartmentId.getText()));
+                existingEmployee.setHireDate(textHireDate.getText());
+                existingEmployee.setEmploymentStatus(textEmploymentStatus.getText());
+                existingEmployee.setContactInfo(textContactInfo.getText());
+                existingEmployee.setAddress(textAddress.getText());
+
+                // Save the updated employee
+                employeeService.saveEmployee(existingEmployee);
+
+                showMessage("The employee has been successfully modified");
+                clearForm();
+                showEmployees();
+            } else {
+                showMessage("The selected employee does not exist in the database");
             }
-
-            var employeeFullName = textFullName.getText();
-            var employeeJobTitle = textJobTitle.getText();
-            var employeeDepartmentId = Integer.parseInt(textDepartmentId.getText());
-            var employeeHireDate = textHireDate.getText();
-            var employeeEmploymentStatus = textEmploymentStatus.getText();
-            var employeeContactInfo = textContactInfo.getText();
-            var employeeAddress = textAddress.getText();
-
-            // Create the employee object
-            var employee = new Employee(
-                    null,
-                    employeeFullName,
-                    employeeJobTitle,
-                    employeeDepartmentId,
-                    employeeHireDate,
-                    employeeEmploymentStatus,
-                    employeeContactInfo,
-                    employeeAddress
-            );
-            employeeService.saveEmployee(employee);
-            showMessage("The employee has been successfully modified");
-            clearForm();
-            showEmployees();
+        } catch (NumberFormatException e) {
+            showMessage("Invalid employee ID");
+        } catch (Exception e) {
+            showMessage("An error occurred while modifying the employee: " + e.getMessage());
         }
     }
 
