@@ -5,13 +5,9 @@ import com.hahn.myemployees.model.UserRole;
 import com.hahn.myemployees.service.UserService;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
-
-import javax.swing.table.DefaultTableModel;
-import java.util.List;
-
-
 
 public class UserForm extends JFrame {
     private UserService userService;
@@ -19,6 +15,7 @@ public class UserForm extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JComboBox<UserRole> roleComboBox;
+    private User selectedUser;
 
     public UserForm(UserService userService) {
         this.userService = userService;
@@ -43,11 +40,13 @@ public class UserForm extends JFrame {
         JButton addButton = new JButton("Add User");
         JButton updateButton = new JButton("Update User");
         JButton deleteButton = new JButton("Delete User");
+        JButton clearButton = new JButton("Clear");
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addButton);
         buttonPanel.add(updateButton);
         buttonPanel.add(deleteButton);
+        buttonPanel.add(clearButton);
 
         // Create table
         String[] columns = {"Username", "Role"};
@@ -59,19 +58,60 @@ public class UserForm extends JFrame {
         add(buttonPanel, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.SOUTH);
 
-        refreshTable();
-
-        // Add button listeners
-        addButton.addActionListener(e -> {
-            User newUser = new User();
-            newUser.setUsername(usernameField.getText());
-            newUser.setPassword(new String(passwordField.getPassword()));
-            newUser.setRole((UserRole) roleComboBox.getSelectedItem());
-            userService.createUser(newUser);
-            refreshTable();
-            clearForm();
+        // Table selection listener
+        userTable.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && userTable.getSelectedRow() != -1) {
+                int selectedRow = userTable.getSelectedRow();
+                selectedUser = userService.getAllUsers().get(selectedRow);
+                populateFields(selectedUser);
+            }
         });
 
+        // Button listeners
+        addButton.addActionListener(e -> {
+            if (validateInput()) {
+                User newUser = new User();
+                newUser.setUsername(usernameField.getText());
+                newUser.setPassword(new String(passwordField.getPassword()));
+                newUser.setRole((UserRole) roleComboBox.getSelectedItem());
+                userService.createUser(newUser);
+                refreshTable();
+                clearForm();
+            }
+        });
+
+        updateButton.addActionListener(e -> {
+            if (selectedUser != null && validateInput()) {
+                selectedUser.setUsername(usernameField.getText());
+                if (passwordField.getPassword().length > 0) {
+                    selectedUser.setPassword(new String(passwordField.getPassword()));
+                }
+                selectedUser.setRole((UserRole) roleComboBox.getSelectedItem());
+                userService.updateUser(selectedUser);
+                refreshTable();
+                clearForm();
+            }
+        });
+
+        deleteButton.addActionListener(e -> {
+            if (selectedUser != null) {
+                int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "Are you sure you want to delete this user?",
+                    "Confirm Delete",
+                    JOptionPane.YES_NO_OPTION
+                );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    userService.deleteUser(selectedUser.getId());
+                    refreshTable();
+                    clearForm();
+                }
+            }
+        });
+
+        clearButton.addActionListener(e -> clearForm());
+
+        refreshTable();
         setLocationRelativeTo(null);
     }
 
@@ -89,9 +129,29 @@ public class UserForm extends JFrame {
         userTable.setModel(new DefaultTableModel(data, columns));
     }
 
+    private void populateFields(User user) {
+        usernameField.setText(user.getUsername());
+        passwordField.setText("");  // Don't populate password for security
+        roleComboBox.setSelectedItem(user.getRole());
+    }
+
     private void clearForm() {
         usernameField.setText("");
         passwordField.setText("");
         roleComboBox.setSelectedIndex(0);
+        selectedUser = null;
+        userTable.clearSelection();
+    }
+
+    private boolean validateInput() {
+        if (usernameField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username is required");
+            return false;
+        }
+        if (selectedUser == null && passwordField.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(this, "Password is required for new users");
+            return false;
+        }
+        return true;
     }
 }
