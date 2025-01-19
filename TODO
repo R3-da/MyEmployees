@@ -25,3 +25,7 @@ Todo:
   ✔ implement Swagger UI @done(25-01-18 23:55)
   ☐ record presentation video
   ☐ enhance validation rules
+  UI:
+    ☐ enhance UserForm layout
+    ☐ enhance EmployeeForm layout
+  
