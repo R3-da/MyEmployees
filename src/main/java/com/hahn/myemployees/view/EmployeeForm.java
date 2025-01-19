@@ -42,7 +42,7 @@ public class EmployeeForm extends JFrame {
         addButton.addActionListener(e -> addEmployee());
         modifyButton.addActionListener(e -> modifyEmployee());
         deleteButton.addActionListener(e -> deleteEmployee());
-        returnButton.addActionListener(e -> returnToHome());
+        returnButton.addActionListener(e -> returnToMenu());
 
         employeeTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -98,12 +98,17 @@ public class EmployeeForm extends JFrame {
 
     }
 
-    private void returnToHome() {
-        this.dispose(); // Close the current form
-        // Assuming you have a HomeForm class
-        HomeScreen homeForm = new HomeScreen(this, userService);;
-        homeForm.setVisible(true);
-    }
+    private void returnToMenu() {
+    this.dispose(); // Close the current form
+    JFrame frame = new JFrame("Menu");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setSize(600, 400);
+    frame.setLocationRelativeTo(null);
+    
+    MenuPanel menuPanel = new MenuPanel(employeeService, userService);
+    frame.add(menuPanel);
+    frame.setVisible(true);
+}
 
 
 

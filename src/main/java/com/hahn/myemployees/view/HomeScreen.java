@@ -3,14 +3,10 @@ package com.hahn.myemployees.view;
 import com.hahn.myemployees.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.swing.*;
 import java.awt.*;
-
 import com.hahn.myemployees.model.User;
-
 import com.hahn.myemployees.service.UserService;
-
 
 @Component
 public class HomeScreen extends JFrame {
@@ -38,7 +34,7 @@ public class HomeScreen extends JFrame {
         loginPanel.add(usernameField);
         loginPanel.add(new JLabel("Password:"));
         loginPanel.add(passwordField);
-        loginPanel.add(new JLabel(""));  // Empty for layout
+        loginPanel.add(new JLabel("")); // Empty for layout
         loginPanel.add(loginButton);
 
         // Menu Panel
@@ -47,16 +43,16 @@ public class HomeScreen extends JFrame {
 
         loginButton.addActionListener(e -> {
             User user = userService.authenticate(
-                    usernameField.getText(),
-                    new String(passwordField.getPassword())
+                usernameField.getText(),
+                new String(passwordField.getPassword())
             );
             if (user != null) {
                 showMenuForRole(user.getRole(), employeeForm);
             } else {
                 JOptionPane.showMessageDialog(this,
-                        "Invalid credentials",
-                        "Login Error",
-                        JOptionPane.ERROR_MESSAGE);
+                    "Invalid credentials",
+                    "Login Error",
+                    JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -134,7 +130,6 @@ public class HomeScreen extends JFrame {
 
         viewTeam.addActionListener(e -> {
             employeeForm.setVisible(true);
-            // employeeForm.setEditMode(false);
             this.setVisible(false);
         });
 
