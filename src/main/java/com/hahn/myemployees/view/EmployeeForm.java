@@ -131,15 +131,24 @@ public class EmployeeForm extends JFrame {
     }
 
     private void deleteEmployee() {
-        var line = employeeTable.getSelectedRow();
+        int line = employeeTable.getSelectedRow();
         if (line != -1) {
-            String employeeId = employeeTable.getModel().getValueAt(line, 0).toString();
+            // Get the employee ID from the selected row
+            String employeeIdStr = employeeTable.getModel().getValueAt(line, 0).toString();
+            int employeeId = Integer.parseInt(employeeIdStr);
 
-            var employee = new Employee();
-            employeeService.deleteEmployee(employee);
-            showMessage("The employee has been deleted successfully");
-            clearForm();
-            showEmployees();
+            // Fetch the employee from the database
+            Employee employee = employeeService.searchEmployeeById(employeeId);
+
+            if (employee != null) {
+                // Delete the employee
+                employeeService.deleteEmployee(employee);
+                showMessage("The employee has been deleted successfully");
+                clearForm();
+                showEmployees();
+            } else {
+                showMessage("The selected employee does not exist in the database");
+            }
         } else {
             showMessage("You must select a record");
         }
