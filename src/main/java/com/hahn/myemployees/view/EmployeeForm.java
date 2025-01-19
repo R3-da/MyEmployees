@@ -2,6 +2,7 @@ package com.hahn.myemployees.view;
 
 import com.hahn.myemployees.model.Employee;
 import com.hahn.myemployees.service.EmployeeService;
+import com.hahn.myemployees.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import java.awt.event.MouseEvent;
 public class EmployeeForm extends JFrame {
 
     EmployeeService employeeService;
+    UserService userService;
     private JPanel panel;
     private JTable employeeTable;
     private JTextField textId;
@@ -28,16 +30,20 @@ public class EmployeeForm extends JFrame {
     private JButton addButton;
     private JButton modifyButton;
     private JButton deleteButton;
+    private JButton returnButton;
 
     private DefaultTableModel tableModel;
 
     @Autowired
-    public EmployeeForm(EmployeeService employeeService) {
+    public EmployeeForm(EmployeeService employeeService, UserService userService) {
         this.employeeService = employeeService;
+        this.userService = userService;
         startForm();
         addButton.addActionListener(e -> addEmployee());
         modifyButton.addActionListener(e -> modifyEmployee());
         deleteButton.addActionListener(e -> deleteEmployee());
+        returnButton.addActionListener(e -> returnToHome());
+
         employeeTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -91,6 +97,15 @@ public class EmployeeForm extends JFrame {
         showEmployees();
 
     }
+
+    private void returnToHome() {
+        this.dispose(); // Close the current form
+        // Assuming you have a HomeForm class
+        HomeScreen homeForm = new HomeScreen(this, userService);;
+        homeForm.setVisible(true);
+    }
+
+
 
     private void modifyEmployee() {
         if (textId.getText().isEmpty()) {
