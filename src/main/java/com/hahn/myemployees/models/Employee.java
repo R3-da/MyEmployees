@@ -18,9 +18,12 @@ import lombok.ToString;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer employeeId;
-    String title;
-    String author;
-    Double price;
-    Integer quantity;
+    Integer id;
+    String fullName;
+    String jobTitle;
+    Integer departmentId;
+    String hireDate;
+    String employmentStatus;
+    String contactInfo;
+    String address;
 }

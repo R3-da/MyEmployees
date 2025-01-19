@@ -18,22 +18,26 @@ public class EmployeeForm extends JFrame {
     private JPanel panel;
     private JTable employeeTable;
     private JTextField textId;
-    private JTextField textEmployee;
-    private JTextField textAuthor;
-    private JTextField textValue;
-    private JTextField textQuantity;
-    private JButton agregarButton;
-    private JButton modificarButton;
-    private JButton eliminarButton;
+    private JTextField textFullName;
+    private JTextField textJobTitle;
+    private JTextField textDepartmentId;
+    private JTextField textHireDate;
+    private JTextField textEmploymentStatus;
+    private JTextField textContactInfo;
+    private JTextField textAddress;
+    private JButton addButton;
+    private JButton modifyButton;
+    private JButton deleteButton;
+
     private DefaultTableModel tableModel;
 
     @Autowired
     public EmployeeForm(EmployeeService employeeService) {
         this.employeeService = employeeService;
         startForm();
-        agregarButton.addActionListener(e -> addEmployee());
-        modificarButton.addActionListener(e -> modifyEmployee());
-        eliminarButton.addActionListener(e -> deleteEmployee());
+        addButton.addActionListener(e -> addEmployee());
+        modifyButton.addActionListener(e -> modifyEmployee());
+        deleteButton.addActionListener(e -> deleteEmployee());
         employeeTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -56,19 +60,31 @@ public class EmployeeForm extends JFrame {
 
     private void addEmployee() {
         // Read the form values
-        if (textEmployee.getText().equals("")) {
+        if (textFullName.getText().equals("")) {
             showMessage("Proporciona el nombre del libro");
-            textEmployee.requestFocusInWindow();
+            textFullName.requestFocusInWindow();
             return;
         }
 
-        var employeeName = textEmployee.getText();
-        var employeeAuthor = textAuthor.getText();
-        var employeeValue = Double.parseDouble(textValue.getText());
-        var employeeQuantity = Integer.parseInt(textQuantity.getText());
+        var employeeFullName = textFullName.getText();
+        var employeeJobTitle = textJobTitle.getText();
+        var employeeDepartmentId = Integer.parseInt(textDepartmentId.getText());
+        var employeeHireDate = textHireDate.getText();
+        var employeeEmploymentStatus = textEmploymentStatus.getText();
+        var employeeContactInfo = textContactInfo.getText();
+        var employeeAddress = textAddress.getText();
 
         // Create the book object
-        var employee = new Employee(null, employeeName, employeeAuthor, employeeValue, employeeQuantity);
+        var employee = new Employee(
+                null,
+                employeeFullName,
+                employeeJobTitle,
+                employeeDepartmentId,
+                employeeHireDate,
+                employeeEmploymentStatus,
+                employeeContactInfo,
+                employeeAddress
+        );
         this.employeeService.saveEmployee(employee);
         showMessage("The book has been added successfully");
         clearForm();
@@ -82,20 +98,31 @@ public class EmployeeForm extends JFrame {
         } else {
 
             // Check that the number of the book is zero
-            if (textEmployee.getText().equals("")) {
-                showMessage("Provide the name of the book");
-                textEmployee.requestFocusInWindow();
+            if (textFullName.getText().equals("")) {
+                showMessage("Proporciona el nombre del libro");
+                textFullName.requestFocusInWindow();
                 return;
             }
 
-            // List the book object to update
-            int employeeId = Integer.parseInt(textId.getText());
-            var employeeTitle = textEmployee.getText();
-            var employeeAuthor = textAuthor.getText();
-            var employeeValue = Double.parseDouble(textValue.getText());
-            var employeeQuantity = Integer.parseInt(textQuantity.getText());
+            var employeeFullName = textFullName.getText();
+            var employeeJobTitle = textJobTitle.getText();
+            var employeeDepartmentId = Integer.parseInt(textDepartmentId.getText());
+            var employeeHireDate = textHireDate.getText();
+            var employeeEmploymentStatus = textEmploymentStatus.getText();
+            var employeeContactInfo = textContactInfo.getText();
+            var employeeAddress = textAddress.getText();
 
-            var employee = new Employee(employeeId, employeeTitle, employeeAuthor, employeeValue, employeeQuantity);
+            // Create the book object
+            var employee = new Employee(
+                    null,
+                    employeeFullName,
+                    employeeJobTitle,
+                    employeeDepartmentId,
+                    employeeHireDate,
+                    employeeEmploymentStatus,
+                    employeeContactInfo,
+                    employeeAddress
+            );
             employeeService.saveEmployee(employee);
             showMessage("The book has been successfully modified");
             clearForm();
@@ -109,7 +136,6 @@ public class EmployeeForm extends JFrame {
             String employeeId = employeeTable.getModel().getValueAt(line, 0).toString();
 
             var employee = new Employee();
-            employee.setEmployeeId(Integer.parseInt(employeeId));
             employeeService.deleteEmployee(employee);
             showMessage("The book has been deleted successfully");
             clearForm();
@@ -120,10 +146,13 @@ public class EmployeeForm extends JFrame {
     }
 
     private void clearForm() {
-        textEmployee.setText("");
-        textAuthor.setText("");
-        textValue.setText("");
-        textQuantity.setText("");
+        textFullName.setText("");
+        textJobTitle.setText("");
+        textDepartmentId.setText("");
+        textHireDate.setText("");
+        textEmploymentStatus.setText("");
+        textContactInfo.setText("");
+        textAddress.setText("");
     }
 
     private void loadSelectedEmployee() {
@@ -132,14 +161,20 @@ public class EmployeeForm extends JFrame {
         if (line != -1) {
             String employeeId = employeeTable.getModel().getValueAt(line, 0).toString();
             textId.setText(employeeId);
-            String employeeTitle = employeeTable.getModel().getValueAt(line, 1).toString();
-            textEmployee.setText(employeeTitle);
-            String employeeAuthor = employeeTable.getModel().getValueAt(line, 2).toString();
-            textAuthor.setText(employeeAuthor);
-            String employeeValue = employeeTable.getModel().getValueAt(line, 3).toString();
-            textValue.setText(employeeValue);
-            String employeeQuantity = employeeTable.getModel().getValueAt(line, 4).toString();
-            textQuantity.setText(employeeQuantity);
+            String employeeFullName = employeeTable.getModel().getValueAt(line, 1).toString();
+            textFullName.setText(employeeFullName);
+            String employeeJobTitle = employeeTable.getModel().getValueAt(line, 1).toString();
+            textJobTitle.setText(employeeJobTitle);
+            String employeeDepartmentId = employeeTable.getModel().getValueAt(line, 2).toString();
+            textDepartmentId.setText(employeeDepartmentId);
+            String employeeHireDate = employeeTable.getModel().getValueAt(line, 3).toString();
+            textHireDate.setText(employeeHireDate);
+            String employeeEmploymentStatus = employeeTable.getModel().getValueAt(line, 4).toString();
+            textEmploymentStatus.setText(employeeEmploymentStatus);
+            String employeeContactInfo = employeeTable.getModel().getValueAt(line, 4).toString();
+            textContactInfo.setText(employeeContactInfo);
+            String employeeAddress = employeeTable.getModel().getValueAt(line, 4).toString();
+            textAddress.setText(employeeAddress);
         }
     }
 
@@ -159,7 +194,8 @@ public class EmployeeForm extends JFrame {
                 return false;
             }
         };
-        String[] header = {"ID", "Name", "Author", "Price", "Quantity"};
+
+        String[] header = {"ID", "Full Name", "Job Title", "Department ID", "Hire Date", "Employment Status", "Contact Info", "Address"};
         this.tableModel.setColumnIdentifiers(header);
 
         // Instantiate the JTable object
@@ -180,11 +216,14 @@ public class EmployeeForm extends JFrame {
         var employees = employeeService.showEmployees();
         employees.forEach(employee -> {
             Object[] lineEmployee = {
-                    employee.getEmployeeId(),
-                    employee.getTitle(),
-                    employee.getAuthor(),
-                    employee.getPrice(),
-                    employee.getQuantity()
+                    employee.getId(),
+                    employee.getFullName(),
+                    employee.getJobTitle(),
+                    employee.getDepartmentId(),
+                    employee.getHireDate(),
+                    employee.getEmploymentStatus(),
+                    employee.getContactInfo(),
+                    employee.getAddress()
             };
             this.tableModel.addRow(lineEmployee);
         });

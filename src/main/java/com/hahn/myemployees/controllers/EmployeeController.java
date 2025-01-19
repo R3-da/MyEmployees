@@ -61,7 +61,6 @@ public class EmployeeController {
     @PutMapping("/{id}")
     public void updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
         logger.info("PUT request received to update employee id: {}", id);
-        employee.setEmployeeId(id);
         employeeService.saveEmployee(employee);
         logger.debug("Employee updated successfully");
     }
