@@ -15,6 +15,12 @@ public class DataInitializer implements CommandLineRunner {
     
     @Override
     public void run(String... args) {
+        System.out.println("============================================");
+        System.out.println("Default admin credentials:");
+        System.out.println("Username: admin");
+        System.out.println("Password: admin123");
+        System.out.println("============================================");
+        
         if (userService.getAllUsers().isEmpty()) {
             User adminUser = new User();
             adminUser.setUsername("admin");
