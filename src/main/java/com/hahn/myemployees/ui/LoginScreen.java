@@ -1,4 +1,4 @@
-package com.hahn.myemployees.view;
+package com.hahn.myemployees.ui;
 
 import com.hahn.myemployees.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,10 @@ import com.hahn.myemployees.service.UserService;
 
 @Component
 public class LoginScreen extends JFrame {
+    
+    @Autowired
+    private UserService userService;
+
     private JPanel loginPanel;
     private JPanel menuPanel;
     private JTextField usernameField;
@@ -96,7 +100,13 @@ public class LoginScreen extends JFrame {
         });
 
         manageUsers.addActionListener(e -> {
-            // TODO: Add user management form
+            User currentUser = userService.authenticate(usernameField.getText(), new String(passwordField.getPassword()));
+            if (currentUser != null && userService.hasPermission(currentUser, "MANAGE_USERS")) {
+                UserForm userForm = new UserForm(userService);
+                userForm.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Access denied. Admin privileges required.");
+            }
         });
 
         logoutButton.addActionListener(e -> logout());

@@ -1,4 +1,4 @@
-package com.hahn.myemployees.view;
+package com.hahn.myemployees.ui;
 
 import javax.swing.*;
 import java.awt.*;

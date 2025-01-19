@@ -1,4 +1,4 @@
-package com.hahn.myemployees.view;
+package com.hahn.myemployees.ui;
 
 import com.hahn.myemployees.model.Employee;
 import com.hahn.myemployees.service.EmployeeService;

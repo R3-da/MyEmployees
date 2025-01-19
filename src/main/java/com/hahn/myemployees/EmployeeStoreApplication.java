@@ -1,6 +1,6 @@
 package com.hahn.myemployees;
 
-import com.hahn.myemployees.view.LoginScreen;
+import com.hahn.myemployees.ui.LoginScreen;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
