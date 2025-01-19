@@ -169,8 +169,8 @@ public class UserForm extends JFrame {
         frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
         
-        MenuPanel menuPanel = new MenuPanel(employeeService, userService);
-        frame.add(menuPanel);
+        MenuScreen menuScreen = new MenuScreen(employeeService, userService);
+        frame.add(menuScreen);
         frame.setVisible(true);
     }
 }

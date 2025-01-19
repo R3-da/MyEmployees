@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MenuPanel extends JPanel {
+public class MenuScreen extends JPanel {
     private JButton employeesButton;
     private JButton departmentsButton;
     private JButton logoutButton;
@@ -18,7 +18,7 @@ public class MenuPanel extends JPanel {
     private final UserService userService;
 
     @Autowired
-    public MenuPanel(EmployeeService employeeService, UserService userService) {
+    public MenuScreen(EmployeeService employeeService, UserService userService) {
         this.employeeService = employeeService;
         this.userService = userService;
         initializePanel();

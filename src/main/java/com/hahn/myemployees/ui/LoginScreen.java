@@ -15,7 +15,7 @@ public class LoginScreen extends JFrame {
     private UserService userService;
 
     private JPanel loginPanel;
-    private JPanel menuPanel;
+    private JPanel menuScreen;
     private JTextField usernameField;
     private JPasswordField passwordField;
 
@@ -42,8 +42,8 @@ public class LoginScreen extends JFrame {
         loginPanel.add(loginButton);
 
         // Menu Panel
-        menuPanel = new JPanel(new GridLayout(3, 1, 10, 10));
-        menuPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        menuScreen = new JPanel(new GridLayout(3, 1, 10, 10));
+        menuScreen.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         loginButton.addActionListener(e -> {
             User user = userService.authenticate(
@@ -65,7 +65,7 @@ public class LoginScreen extends JFrame {
 
     private void showMenuForRole(UserRole role, EmployeeForm employeeForm) {
         loginPanel.setVisible(false);
-        menuPanel.removeAll();
+        menuScreen.removeAll();
 
         switch (role) {
             case ADMIN:
@@ -79,8 +79,8 @@ public class LoginScreen extends JFrame {
                 break;
         }
 
-        add(menuPanel);
-        menuPanel.setVisible(true);
+        add(menuScreen);
+        menuScreen.setVisible(true);
         revalidate();
         repaint();
     }
@@ -90,9 +90,9 @@ public class LoginScreen extends JFrame {
         JButton manageUsers = new JButton("Manage Users");
         JButton logoutButton = new JButton("Logout");
 
-        menuPanel.add(manageEmployees);
-        menuPanel.add(manageUsers);
-        menuPanel.add(logoutButton);
+        menuScreen.add(manageEmployees);
+        menuScreen.add(manageUsers);
+        menuScreen.add(logoutButton);
 
         manageEmployees.addActionListener(e -> {
             employeeForm.setVisible(true);
@@ -118,9 +118,9 @@ public class LoginScreen extends JFrame {
         JButton viewReports = new JButton("View Reports");
         JButton logoutButton = new JButton("Logout");
 
-        menuPanel.add(manageEmployees);
-        menuPanel.add(viewReports);
-        menuPanel.add(logoutButton);
+        menuScreen.add(manageEmployees);
+        menuScreen.add(viewReports);
+        menuScreen.add(logoutButton);
 
         manageEmployees.addActionListener(e -> {
             employeeForm.setVisible(true);
@@ -135,9 +135,9 @@ public class LoginScreen extends JFrame {
         JButton manageTeam = new JButton("Manage Team");
         JButton logoutButton = new JButton("Logout");
 
-        menuPanel.add(viewTeam);
-        menuPanel.add(manageTeam);
-        menuPanel.add(logoutButton);
+        menuScreen.add(viewTeam);
+        menuScreen.add(manageTeam);
+        menuScreen.add(logoutButton);
 
         viewTeam.addActionListener(e -> {
             employeeForm.setVisible(true);
@@ -150,7 +150,7 @@ public class LoginScreen extends JFrame {
     private void logout() {
         usernameField.setText("");
         passwordField.setText("");
-        menuPanel.setVisible(false);
+        menuScreen.setVisible(false);
         loginPanel.setVisible(true);
         revalidate();
         repaint();
